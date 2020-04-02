@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import CharacterList, { Character } from './CharacterList';
+import Counter from './Counter';
 
 import './App.css';
 
 class App extends Component {
   render() {
+
     const characters: Character[] = [
       {
         id: 1,
@@ -31,6 +33,7 @@ class App extends Component {
           <h1>はねバド！キャラクター一覧</h1>
         </header>
         <CharacterList school="北小町高校" characters={characters} />
+        <Counter />
       </div>
     )
   }
