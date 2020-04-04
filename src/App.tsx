@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import CharacterList, { Character } from './CharacterList';
+import CharacterListFC, { Character } from './CharacterListFC';
 import Counter from './Counter';
-import Timer from './Timer';
+import TimerContainer from './container/Timer';
 
 import './App.css';
 
@@ -33,9 +33,9 @@ class App extends Component {
         <header>
           <h1>はねバド！キャラクター一覧</h1>
         </header>
-        <CharacterList school="北小町高校" characters={characters} />
+        <CharacterListFC school="北小町高校" characters={characters} />
         <Counter />
-        <Timer />
+        <TimerContainer />
       </div>
     )
   }

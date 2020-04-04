@@ -56,14 +56,3 @@ class Counter extends Component<{}, CounterState> {
 }
 
 export default Counter;
-
-
-
-
-
-
-
-
-
-
-
