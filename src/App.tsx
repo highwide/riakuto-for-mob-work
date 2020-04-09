@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CharacterListFC, { Character } from './CharacterListFC';
 import Counter from './Counter';
-import Timer from './Timer';
+import Timer from './container/Timer';
 
 import './App.css';
 

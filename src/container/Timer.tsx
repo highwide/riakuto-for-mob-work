@@ -1,50 +1,31 @@
-import React, { Component } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import Timer from '../component/Timer';
 
-const LIMIT = 60;
+const useTimer = (limitSec: number): [number, () => void] => {
+  const [timeLeft, setTimeLeft] = useState(limitSec);
 
-interface TimerState {
-  timeLeft: number;
-}
-
-class TimerContainer extends Component<{}, TimerState> {
-  constructor(props: {}) {
-    super(props);
-    this.state = { timeLeft: LIMIT };
-  }
-
-  reset = () => {
-    this.setState({ timeLeft: LIMIT });
+  const reset = () => {
+    setTimeLeft(limitSec);
   };
 
-  tick = () => {
-    this.setState(prevState => ({ timeLeft: prevState.timeLeft - 1 }));
+  const tick = () => {
+    setTimeLeft(prevTime => (prevTime === 0 ? limitSec : prevTime - 1 ));
   };
 
-  componentDidMount = () => {
-    this.timerId = setInterval(this.tick, 1000);
-  };
+  useEffect(() => {
+    const timerId = setInterval(tick, 1000);
 
-  componentDidUpdate = () => {
-    const { timeLeft } = this.state;
-    if (timeLeft === 0){
-      this.reset();
-    }
-  };
+    return () => clearInterval(timerId);
+  }, []);
 
-  componentWillUnmount = () => {
-    clearInterval(this.timerId as NodeJS.Timer);
-  };
+  return [timeLeft, reset];
+};
 
-  timerId?: NodeJS.Timer;
+const TimerContainer: FC = () => {
+  const LIMIT = 60;
+  const [timeLeft, reset] = useTimer(LIMIT);
 
-  render() {
-    const { timeLeft } = this.state;
-
-    return (
-      <Timer timeLeft={timeLeft} reset={this.reset} />
-    );
-  }
+  return <Timer timeLeft={timeLeft} reset={reset} />;
 }
 
 export default TimerContainer;
