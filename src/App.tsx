@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import CharacterListFC, { Character } from './CharacterListFC';
 import Counter from './Counter';
 import Timer from './container/Timer';
-
+import CounterUsingRef from './CounterUsingRef';
+import Parent from './Parent';
 import './App.css';
 
 class App extends Component {
@@ -36,6 +37,8 @@ class App extends Component {
         <CharacterListFC school="北小町高校" characters={characters} />
         <Counter />
         <Timer />
+        <CounterUsingRef />
+        <Parent a='foo' b='bar' />
       </div>
     )
   }
