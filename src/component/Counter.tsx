@@ -1,26 +1,24 @@
-import React, { FC, SyntheticEvent, useState } from 'react';
+import React, { FC } from 'react';
 import { Card, Statistic, Button } from 'semantic-ui-react';
 
 import './Counter.css';
+import ColorfulBeads from './ColorfulBeads';
 
-const Counter: FC = () => {
-  const [count, setCount] = useState(0);
+export interface CounterProps {
+  count?: number;
+  add?: (amount: number) => void;
+  decrement?: () => void;
+  increment?: () => void;
+}
 
-  const increment = (e: SyntheticEvent) => {
-    e.preventDefault();
-    setCount(count + 1);
-  }
-
-  const decrement = (e: SyntheticEvent) => {
-    e.preventDefault();
-    setCount(count - 1);
-  }
-
+const Counter: FC<CounterProps> = ({
+  count = 0,
+  add = () => {},
+  decrement = () => {},
+  increment = () => {},
+}) => {
   return (
-    <div className="container">
-      <header>
-        <h1>カウンター</h1>
-      </header>
+    <>
       <Card>
         <Statistic className="number-board">
           <Statistic.Label>count</Statistic.Label>
@@ -35,9 +33,15 @@ const Counter: FC = () => {
               +1
             </Button>
           </div>
+          <div className="fluid-button">
+            <Button fluid color="grey" onClick={() => add(10)}>
+              +10
+            </Button>
+          </div>
         </Card.Content>
       </Card>
-    </div>
+      <ColorfulBeads count={count} />
+    </>
   );
 };
 

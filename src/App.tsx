@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import CharacterListFC, { Character } from './CharacterListFC';
-import Counter from './Counter';
+import Counter from './container/Counter';
 import Timer from './container/Timer';
 import CounterUsingRef from './CounterUsingRef';
 import Parent from './Parent';
 import './App.css';
+
+// index -> App -> Counter(container component) -> Counter(presentational component)
 
 class App extends Component {
   render() {
