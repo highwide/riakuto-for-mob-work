@@ -5,17 +5,17 @@ import './Counter.css';
 import ColorfulBeads from './ColorfulBeads';
 
 export interface CounterProps {
-  count?: number;
-  add?: (amount: number) => void;
-  decrement?: () => void;
-  increment?: () => void;
+  count: number;
+  add: (amount: number) => void;
+  decrement: () => void;
+  increment: () => void;
 }
 
 const Counter: FC<CounterProps> = ({
-  count = 0,
-  add = () => {},
-  decrement = () => {},
-  increment = () => {},
+  count,
+  add,
+  decrement,
+  increment,
 }) => {
   return (
     <>

@@ -1,35 +1,24 @@
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
+import React, { FC } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { add, decrement, increment } from '../actions/counter';
 import Counter from '../component/Counter';
 import { CounterState } from '../reducer';
 
-interface StateProps {
-  count: number;
-}
+const countSelector = (state: CounterState) => state.count;
 
-interface DispatchProps {
-  add: (amount: number) => void;
-  decrement: () => void;
-  increment: () => void;
-}
+const CounterContainer: FC = () => {
+  const count = useSelector(countSelector);
+  const dispatch = useDispatch();
 
-const mapStateToProps = (state: CounterState): StateProps => ({
-  count: state.count,
-});
+  return (
+    <Counter
+      count={count}
+      add={amount => dispatch(add(amount))}
+      increment={() => dispatch(increment())}
+      decrement={() => dispatch(decrement())}
+    />
+  )
+};
 
-/*
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
-  add: amount => dispatch(add(amount)),
-  decrement: () => dispatch(decrement()),
-  increment: () => dispatch(increment()),
-*/
-
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps =>
-  bindActionCreators(
-    { add, decrement, increment },
-    dispatch,
-  );
-
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default CounterContainer;
